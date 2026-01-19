@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [idNumber, setIdNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -11,23 +12,13 @@ function Register() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const birthYear = new Date(birthDate).getFullYear();
-    const age = new Date().getFullYear() - birthYear;
-
-    if (!idNumber) {
-      setMessage("ת.ז. חובה!");
-      return;
-    }
-
-    if (!name) {
-      setMessage("שם חובה!");
+    if (!idNumber || !name || !email || !birthDate || !phone || !password) {
+      setMessage("כל השדות חובה!");
       return;
     }
 
@@ -35,6 +26,9 @@ function Register() {
       setMessage("אימייל לא חוקי!");
       return;
     }
+
+    const birthYear = new Date(birthDate).getFullYear();
+    const age = new Date().getFullYear() - birthYear;
 
     if (age < 21) {
       setMessage("גיל חייב להיות מעל 21!");
@@ -52,21 +46,57 @@ function Register() {
     }
 
     setMessage("הרשמה הצליחה! ✅");
-    navigate('/')
+    navigate("/");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>הרשמה</h2>
-      <input placeholder="ת.ז." value={idNumber} onChange={e => setIdNumber(e.target.value)} />
-      <input placeholder="שם" value={name} onChange={e => setName(e.target.value)} />
-      <input placeholder="אימייל" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="date" placeholder="תאריך לידה" value={birthDate} onChange={e => setBirthDate(e.target.value)} />
-      <input placeholder="פלאפון" value={phone} onChange={e => setPhone(e.target.value)} />
-      <input type="password" placeholder="סיסמא" value={password} onChange={e => setPassword(e.target.value)} />
-      <button type="submit">הרשמה</button>
-      {message && <p>{message}</p>}
-    </form>
+    <div className="auth-container">
+      <form className="auth-card" onSubmit={handleSubmit}>
+        <h2>הרשמה</h2>
+
+        <input
+          placeholder="ת.ז."
+          value={idNumber}
+          onChange={(e) => setIdNumber(e.target.value)}
+        />
+
+        <input
+          placeholder="שם מלא"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          type="email"
+          placeholder="אימייל"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="date"
+          value={birthDate}
+          onChange={(e) => setBirthDate(e.target.value)}
+        />
+
+        <input
+          placeholder="פלאפון"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="סיסמא"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">הרשמה</button>
+
+        {message && <p className="auth-message">{message}</p>}
+      </form>
+    </div>
   );
 }
 

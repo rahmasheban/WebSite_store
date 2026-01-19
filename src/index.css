@@ -3,103 +3,299 @@
 ===================== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #fdf7f2;
   color: #4b3b2a;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 /* =====================
    Buttons
 ===================== */
 button {
-  background: #c89b7b;
   border: none;
-  color: white;
+  border-radius: 12px;
   padding: 10px 16px;
-  border-radius: 10px;
-  cursor: pointer;
   font-weight: 500;
-  transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background: #b58563;
   transform: translateY(-2px);
 }
 
+.primary-btn {
+  background: #6b4f3f;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background: #8a5c3a;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #6b4f3f;
+  border: 1px solid #c89b7b;
+}
+
+.secondary-btn:hover {
+  background: #f3e2d3;
+}
+
 /* =====================
-   Products Grid
+   Navbar
 ===================== */
+.navbar {
+  height: 70px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.navbar h1 {
+  font-size: 22px;
+  color: #6b4f3f;
+}
+
+.navbar .user-name {
+  font-weight: 500;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+/* =====================
+   Homepage & Products Grid
+===================== */
+.home-container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 30px;
-  padding: 40px;
-  margin-right: 340px; /* مساحة للسلة */
+  gap: 25px;
+  flex: 1;
 }
 
 /* =====================
    Product Card
 ===================== */
 .product-card {
-  background: #ffffff;
+  background: #fff;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
 }
 
 .product-card img {
-  width: 39%;
-  height: 260px;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  background: #eee;
-}
-
-.product-card-content {
-  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
 .product-card h3 {
-  margin: 0 0 8px;
   font-size: 18px;
+  color: #4b3b2a;
 }
 
 .product-card p {
   font-size: 14px;
   color: #6f5b4a;
-  margin-bottom: 12px;
+  margin: 8px 0;
 }
 
 .product-card .price {
   font-weight: bold;
   font-size: 16px;
-  margin-bottom: 10px;
+  color: #c89b7b;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 10px 10px 10px;
+}
+
+.details-btn {
+  background: #c89b7b;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.details-btn:hover {
+  background: #b58563;
+}
+
+.add-btn {
+  background: #6b4f3f;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.add-btn:hover {
+  background: #8a5c3a;
+}
+
+/* =====================
+   Product Details Page
+===================== */
+.product-details-container {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+  background: #fdf7f2;
+  color: #4b3b2a;
+}
+
+.product-images {
+  flex: 1;
+  min-width: 300px;
+}
+
+.product-images .main-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnails .thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.thumbnails .thumb.active,
+.thumbnails .thumb:hover {
+  opacity: 1;
+  border-color: #c89b7b;
+  transform: scale(1.05);
+}
+
+.product-info {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.product-info h2 {
+  font-size: 28px;
+  color: #8a4f2d;
+}
+
+.product-info p {
+  font-size: 16px;
+  color: #6f5b4a;
+  line-height: 1.5;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 22px;
+  color: #c89b7b;
+}
+
+.size-select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  width: 150px;
+}
+
+.add-to-cart-btn {
+  background: #6b4f3f;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: #8a5c3a;
 }
 
 /* =====================
    Cart Sidebar
 ===================== */
-.cart-sidebar {
+.cart-overlay {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 320px;
-  height: 100vh;
-  background: #fffaf5;
-  box-shadow: -6px 0 25px rgba(0, 0, 0, 0.12);
-  padding: 25px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
   z-index: 1000;
+}
+
+.cart-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  background: #fffaf5;
+  padding: 25px;
   overflow-y: auto;
+  box-shadow: -6px 0 25px rgba(0,0,0,0.12);
 }
 
 .cart-sidebar h3 {
@@ -111,41 +307,51 @@ button:hover {
 
 .cart-item {
   display: flex;
-  align-items: center;
   gap: 12px;
   margin-bottom: 15px;
   padding-bottom: 12px;
   border-bottom: 1px solid #e6d8cc;
+  align-items: center;
 }
 
 .cart-item img {
   width: 60px;
   height: 60px;
-  border-radius: 10px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-.cart-item-info {
-  flex: 1;
-}
-
-.cart-item-title {
+.cart-item-info h4 {
   font-size: 14px;
-  font-weight: 500;
+  margin: 0 0 5px;
 }
 
-.cart-item-actions {
-  display: flex;
-  gap: 6px;
+.cart-item-info p {
+  font-size: 13px;
+  margin: 2px 0;
 }
 
-.cart-item-actions button {
-  padding: 6px 10px;
+.remove-btn {
+  background: #e07b7b;
+  color: white;
+  border: none;
   border-radius: 6px;
+  cursor: pointer;
+  padding: 5px 8px;
+}
+
+.close-cart {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #6b4f3f;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 /* =====================
-   Auth (Login / Register)
+   Auth Forms (Login/Register)
 ===================== */
 .auth-container {
   min-height: 100vh;
@@ -160,15 +366,15 @@ button:hover {
   padding: 45px 40px;
   border-radius: 22px;
   width: 380px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   text-align: center;
 }
 
 .auth-card h2 {
   margin-bottom: 30px;
   font-size: 28px;
-  color: #6b4f3f;
-  font-weight: 600;
+  color: #8a4f2d;
+  font-weight: bold;
 }
 
 .auth-card input {
@@ -185,49 +391,48 @@ button:hover {
   border-color: #c89b7b;
 }
 
-/* =====================
-   Navbar (لو موجود)
-===================== */
-.navbar {
-  height: 70px;
-  background: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
+.auth-card button {
+  width: 100%;
+  margin-top: 10px;
 }
 
-.navbar h1 {
-  font-size: 22px;
-  color: #6b4f3f;
-}
-
-.navbar .user-name {
-  font-weight: 500;
+.auth-message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #8b5e3c;
 }
 
 /* =====================
-   Search Bar
-===================== */
-.search-input {
-  width: 300px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-/* =====================
-   Responsive
+   Responsive Design
 ===================== */
 @media (max-width: 900px) {
+  .home-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
   .products-grid {
-    margin-right: 0;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
   .cart-sidebar {
     width: 100%;
     height: auto;
     position: relative;
+  }
+
+  .product-details-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-images,
+  .product-info {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .thumbnails {
+    justify-content: center;
   }
 }

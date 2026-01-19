@@ -16,12 +16,17 @@ function CartSidebar() {
           cartItems.map((item) => (
             <div className="cart-item" key={item.id}>
               <img src={item.images?.[0]} alt={item.title} />
-              <div>
+              <div className="cart-item-info">
                 <h4>{item.title}</h4>
                 <p>Qty: {item.qty}</p>
                 <p>${item.price}</p>
               </div>
-              <button onClick={() => removeFromCart(item.id)}>✕</button>
+              <button
+                className="remove-btn"
+                onClick={() => removeFromCart(item.id)}
+              >
+                ✕
+              </button>
             </div>
           ))
         )}

@@ -1,27 +1,3 @@
-/*import { useEffect, useState } from "react";
-import { getProducts } from "../api/productsApi";
-import ProductCard from "../components/ProductCard";
-import CartSidebar from "../components/CartSidebar";  
-
-function Home() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getProducts().then((res) => setProducts(res.data));
-  }, []);
-
-  return (
-    <div className="grid">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
-  );
-}
-
-export default Home;
-*/
-
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/productsApi";
 import ProductCard from "../components/ProductCard";
@@ -29,14 +5,20 @@ import CartSidebar from "../components/CartSidebar";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProducts().then((res) => setProducts(res.data));
+    getProducts()
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
+  if (loading) return <p style={{ textAlign: "center", marginTop: "50px" }}>Loading products...</p>;
+
   return (
-    <>
-      {/* المنتجات */}
+    <div className="home-container">
+      {/* Grid المنتجات */}
       <div className="products-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -45,7 +27,7 @@ function Home() {
 
       {/* السلة */}
       <CartSidebar />
-    </>
+    </div>
   );
 }
 
